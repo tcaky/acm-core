@@ -1,0 +1,13 @@
+apiVersion: resourcemanager.cnrm.cloud.google.com/v1beta1
+kind: Folder
+metadata:
+  labels:
+    unique-proj-id: DSCO-1
+    test-label: "getting testy"
+    cloud-profile: "1"
+    environment: "exp"
+  name: ph-daniel2
+spec:
+  displayName: Config Connector Sample
+  folderRef:
+    external: "712587760826"
