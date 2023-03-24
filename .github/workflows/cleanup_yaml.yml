@@ -1,0 +1,31 @@
+name: Cleanup YAML
+
+on:
+  push:
+    paths:
+      - '**.yml'
+      - '**.yaml'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+
+    - name: Remove trailing whitespaces
+      run: |
+        find . -type f -iname '*.yml' -o -iname '*.yaml' -exec sed -i 's/[[:blank:]]\+$//' {} \;
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git diff-index --quiet HEAD || git commit -m "Strip trailing whitespaces from YAML files"
+        git push origin ${{ github.head_ref }}
