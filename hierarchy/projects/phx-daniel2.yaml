@@ -8,7 +8,8 @@ metadata:
     test-label: "getting testy"
     cloud-profile: "1"
     environment: "exp"
-  name: phx-daniel2 # must be unique 
+  # name: must be unique 
+  name: phx-daniel2 
 spec:
   name: Config Connector Sample
   folderRef:
